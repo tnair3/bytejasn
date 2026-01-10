@@ -38,7 +38,7 @@ export const projects: Projects[] = [
     tech: [".NET", "C#"],
     gallery: [],
     github: "",
-    status: "in progress",
+    status: "planned",
     year: "2026",
     featured: true
   },
@@ -50,7 +50,7 @@ export const projects: Projects[] = [
     tech: ["Unity", "C#"],
     gallery: [],
     github: "",
-    status: "in progress",
+    status: "planned",
     year: "2026/27",
   },
   {
