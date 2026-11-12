@@ -68,61 +68,15 @@ export default function Music() {
           ))}
         </div>
 
-        {/* Sheet Music */}
-        <div className="flex flex-col gap-6 mb-10">
-          <button
-            onClick={() => openModal("sheet")}
-            className="px-6 py-2 border border-black hover:bg-black hover:text-white transition cursor-pointer rounded-lg"
-          >
-            sheet music
-          </button>
-        </div>
-
         {/* Covers */}
         <div className="flex flex-col gap-6 mb-10">
           <p className="text-gray-600 modal max-w-md text-center">
-            all covers of music created by other artists can be found on my{" "}
-            <span><a href="https://www.instagram.com/by.tejasn/" className="underline hover:text-blue-600">
+            all covers of music can be found on my{" "}
+            <span><a href="https://www.instagram.com/by.tejasn/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-600">
               instagram
             </a></span>
           </p>
         </div>
-
-        {/* Modal */}
-        {open && (
-          <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setOpen(false)}>
-            <div className="bg-white w-[60vw] h-[60vh] max-w-4xl max-h-[80vh] rounded-lg pt-8 p-12 relative overflow-y-auto hide-scrollbar" onClick={(e) => e.stopPropagation()}>
-              {content === "sheet" && (
-                <>
-                  <h2 className="font-bold mb-2">sheet music</h2>
-                  <p className="modal">
-                    arrangements of existing pieces and original compositions 
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-8 pt-5">
-                    {arrangements.map((item) => (
-                      <div key={item.id} className="text-center">
-                        <a href={item.pdf} download className="group block relative">
-                          <img
-                            src={item.preview}
-                            alt={item.title}
-                            className="w-full border border-black"
-                          />
-
-                          <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                            <span className="text-white font-bold tracking-wide">open</span>
-                          </div>
-                        </a>
-
-                        <h3 className="mt-3 text-sm">{item.title}</h3>
-                        <p className="subtitle text-zinc-600">{item.composer}</p>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        )}
       </main>
     </div>
   );

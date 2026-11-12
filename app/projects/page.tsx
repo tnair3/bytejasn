@@ -109,11 +109,11 @@ export default function ProjectsPage() {
                   rel="noopener noreferrer"
                   className="inline-block text-blue-500 hover:underline mb-6"
                 >
-                  GitHub Release
+                  GitHub Repository
                 </a>
               ) : (
                 <span className="text-gray-400 mb-6 block">
-                  No release available
+                  No repository available
                 </span>
               )}
 

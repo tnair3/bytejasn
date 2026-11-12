@@ -9,17 +9,17 @@ export type Scores = {
 }
 
 export const scores: Scores[] = [
-  {
+  /*{
     id: "ninelayersofhell",
     title: "PLACEHOLDER",
     type: "album",
     scoreart: "/scoreart/placeholder.png",
     link: "https://google.com",
     composers: ["Tejas Nair", "Jingwen"]
-  },
+  },*/
   {
-    id: "placeholder-single",
-    title: "PLACEHOLDER",
+    id: "titanhome-bossmusic",
+    title: "Boss Music",
     type: "single",
     scoreart: "/scoreart/placeholder.png",
     link: "https://google.com",
