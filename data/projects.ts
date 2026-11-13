@@ -6,6 +6,7 @@ export type Projects = {
   tech: string[];
   gallery: string[]; // public paths to screenshots, e.g. "/projects/pac/screenshot-1.png"
   github?: string;
+  release?: string;
   status: "completed" | "in active development" | "planned";
   year: string;
   featured?: boolean; // pinned at the top of the projects page
@@ -38,6 +39,7 @@ export const projects: Projects[] = [
     tech: ["C++", "C#", "Vulkan", "Dear ImGui", "Avalonia UI", "XAML"],
     gallery: [],
     github: "https://github.com/tnair3/Daedalus",
+    release: "pre-alpha",
     status: "in active development",
     year: "2027",
     featured: true,
@@ -49,6 +51,7 @@ export const projects: Projects[] = [
     tech: ["Kotlin", "Jetpack Compose", "Android"],
     gallery: [],
     github: "https://github.com/tnair3/MediaPlayer",
+    release: "1.0-alpha2",
     status: "in active development",
     year: "2026",
   },

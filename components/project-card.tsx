@@ -37,14 +37,21 @@ export default function ProjectCard({
     >
       <div className={cn("flex flex-col gap-4", featured ? "p-6 sm:p-8" : "p-5")}>
         <div>
-          <h3
-            className={cn(
-              "font-bold",
-              featured ? "text-2xl sm:text-3xl" : "text-lg",
+          <div className="flex items-baseline gap-2">
+            <h3
+                className={cn(
+                    "font-bold",
+                    featured ? "text-2xl sm:text-3xl" : "text-lg",
+                )}
+            >
+              {project.title}
+            </h3>
+            {project.release && (
+                <span className="text-xs text-zinc-500 sm:text-sm">
+                  {project.release}
+                </span>
             )}
-          >
-            {project.title}
-          </h3>
+          </div>
           <p className="mt-1.5 flex items-center gap-2 text-sm text-zinc-500">
             <span>{project.year}</span>
             <StatusBadge status={project.status} />

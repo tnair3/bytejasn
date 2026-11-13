@@ -40,8 +40,14 @@ export default async function ProjectPage({ params }: Props) {
                 projects
             </TransitionLink>
 
-            <header className="mt-8">
+            <header className="mt-8"><div className="flex flex-wrap items-baseline gap-2">
                 <h1 className="text-3xl font-bold sm:text-5xl">{project.title}</h1>
+                {project.release && (
+                    <span className="text-sm text-zinc-500 sm:text-base">
+                        {project.release}
+                    </span>
+                )}
+            </div>
                 <p className="mt-3 flex items-center gap-2 text-sm text-zinc-500 sm:text-base">
                     <span>{project.year}</span>
                     <StatusBadge status={project.status} />
