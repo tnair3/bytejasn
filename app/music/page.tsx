@@ -22,7 +22,7 @@ export default function MusicPage() {
     <div className="mx-auto w-full max-w-5xl px-6 py-12 sm:py-16">
       <PageHeader
         title="music"
-        subtitle="original compositions, arrangements and covers."
+        subtitle="original compositions and covers."
       />
 
         {/* Original compositions */}
