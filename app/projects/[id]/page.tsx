@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
     const project = getProject(id);
     if (!project) return {};
-    return { title: project.title, description: project.description };
+    return { description: project.description };
 }
 
 export default async function ProjectPage({ params }: Props) {

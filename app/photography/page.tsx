@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/page-header";
 
-export const metadata: Metadata = { title: "photography" };
-
 export default function PhotographyPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-6 py-12 sm:py-16">

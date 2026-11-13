@@ -4,8 +4,6 @@ import { TransitionLink } from "@/components/transition-link";
 import SocialLinks from "@/components/social-links";
 import { ArrowRightIcon } from "@/components/icons";
 
-export const metadata: Metadata = { title: "about me" };
-
 // Edit the content here.
 const skills = [
   { label: "languages", items: ["C#", "C++", "Java", "Kotlin", "XML", "Python"] },

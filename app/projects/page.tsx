@@ -3,8 +3,6 @@ import { projects } from "@/data/projects";
 import PageHeader from "@/components/page-header";
 import ProjectCard from "@/components/project-card";
 
-export const metadata: Metadata = { title: "projects" };
-
 export default function ProjectsPage() {
     const pinned = projects.filter((p) => p.featured);
     const planned = projects.filter((p) => !p.featured && p.status === "planned");
