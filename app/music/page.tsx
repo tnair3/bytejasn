@@ -4,10 +4,55 @@ import PageHeader from "@/components/page-header";
 import { scores } from "@/data/scores";
 import { socials } from "@/data/socials";
 import { ArrowUpRightIcon } from "@/components/icons";
+import EquipmentSection from "@/components/equipment-section";
+import ExpandableEquipmentSection from "@/components/expandable-equipment-section";
 
 export const metadata: Metadata = { title: "music" };
 
 const instagram = socials.find((s) => s.name === "Instagram");
+
+const equipment = [
+    {
+        name: "Cubase 15 Artist",
+        category: "DAW",
+        description: "Music production and composition",
+    },
+    {
+        name: "MuseScore",
+        category: "Notation",
+        description: "Score writing and music notation",
+    },
+];
+
+const expandableEquipment = [
+    {
+        name: "Virtual instruments",
+        category: "Virtual instruments",
+        description: "Sample libraries and orchestral instruments",
+        contents: [
+            {
+                name: "BBC Symphony Orchestra Core",
+                description: "Full orchestral sample library by Spitfire Audio in collaboration with BBC Studios, recorded at Maida Vale Studios in London",
+            },
+            {
+                name: "NOIRE",
+                description: "Sampled grand piano by Native Instruments in collaboration with Galaxy Instruments, played by Nils Frahm, recorded at Saal 3, in the Funkhaus Nalepastrasse recording complex in Berlin"
+            },
+            {
+                name: "EastWest Hollywood Choirs Diamond",
+                description: "Male and female cinematic choral library by EastWest Sounds, produced by Doug Rogers and Nick Phoenix, recorded at EastWest Studios in California",
+            },
+            {
+                name: "Abbey Road Low Percussion Core",
+                description: "Orchestral low percussion library by Spitfire Audio in collaboration with Abbey Road Studios, recorded at Studio One, Abbey Road Studios in London"
+            },
+            {
+                name: "Spitfire Originals",
+                description: "Various smaller virtual instrument libraries by Spitfire Audio, including Intimate Strings, Cinematic Pads, and Crystal Keys"
+            },
+        ],
+    },
+];
 
 function SectionHeading({ id, children }: { id: string; children: string }) {
   return (
@@ -23,10 +68,19 @@ function SectionHeading({ id, children }: { id: string; children: string }) {
 export default function MusicPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-12 sm:py-16">
-      <PageHeader
-        title="music"
-        subtitle="original compositions and covers."
-      />
+        <PageHeader
+            title="music"
+            subtitle="original compositions and covers."
+        />
+
+        <EquipmentSection
+            description="The software and tools I use for music production, composition, and notation."
+            items={equipment}
+        />
+
+        <ExpandableEquipmentSection
+            items={expandableEquipment}
+        />
 
         {/* Original compositions */}
         <section className="mb-14" aria-labelledby="compositions-heading">
