@@ -13,8 +13,8 @@ const skills = [
 ];
 
 const instruments = [
-  { name: "violin", grade: 7, years: 12 },
-  { name: "flute", grade: 5, years: 6 },
+  { name: "violin", grade: 7, years: "from 2014" },
+  { name: "flute", grade: 5, years: "from 2020" },
 ];
 
 const ensembles = [
@@ -81,7 +81,7 @@ export default function AboutPage() {
 
       <Row label="photography">
         <p className="text-lg leading-relaxed">
-          I am an aspiring freelance photographer.
+          I am a photographer as a hobbyist as well as freelance.
         </p>
         <TransitionLink
           href="/photography"
@@ -101,7 +101,7 @@ export default function AboutPage() {
             >
               <p className="font-bold">{instrument.name}</p>
               <p className="mt-1 text-sm text-zinc-500">
-                grade {instrument.grade} · {instrument.years} years
+                grade {instrument.grade} · {instrument.years}
               </p>
             </li>
           ))}
@@ -128,7 +128,7 @@ export default function AboutPage() {
           href="/music"
           className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
         >
-          listen &amp; read my music
+          listen to my music
           <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
         </TransitionLink>
       </Row>
