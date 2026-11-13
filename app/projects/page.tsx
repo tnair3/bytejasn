@@ -7,8 +7,7 @@ export const metadata: Metadata = { title: "projects" };
 
 export default function ProjectsPage() {
     const pinned = projects.filter((p) => p.featured);
-    const planned = projects.filter((p) => !p.featured && p.status === "planned");
-    const others = projects.filter((p) => !p.featured && p.status !== "planned");
+    const others = projects.filter((p) => !p.featured);
 
     return (
         <div className="mx-auto w-full max-w-6xl px-6 py-12 sm:py-16">
@@ -31,16 +30,6 @@ export default function ProjectsPage() {
                 <section className="mb-4">
                     <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {others.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {planned.length > 0 && (
-                <section>
-                    <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        {planned.map((project) => (
                             <ProjectCard key={project.id} project={project} />
                         ))}
                     </div>
