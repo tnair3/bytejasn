@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import PageHeader from "@/components/page-header";
 
 export default function PhotographyPage() {

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import PageHeader from "@/components/page-header";
 import ProjectCard from "@/components/project-card";

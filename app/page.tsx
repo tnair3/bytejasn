@@ -31,7 +31,7 @@ export default function Home() {
           ))}
         </nav>
 
-        <SocialLinks className="mt-4" />
+        <SocialLinks className="mt-4 justify-center" />
       </div>
     </div>
   );

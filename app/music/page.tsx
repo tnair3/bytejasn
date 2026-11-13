@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import PageHeader from "@/components/page-header";
 import { arrangements } from "@/data/arrangements";
@@ -131,7 +130,7 @@ export default function MusicPage() {
           covers
         </h2>
         <p className="mt-1 text-sm text-zinc-600">
-          all my covers on instagram.
+          all my covers live on instagram.
         </p>
         {instagram && (
           <a
