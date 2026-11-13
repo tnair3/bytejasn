@@ -1,85 +1,130 @@
 @import "tailwindcss";
 
-/* Light theme (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa; /* zinc-50 */
+  --foreground: #18181b; /* zinc-900 */
+
+  /* page transition */
+  --vt-duration: 600ms;
+  --vt-ease: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* Dark theme */
+/* ------------------------------------------------------------------ */
+/* Dark mode                                                           */
+/*                                                                     */
+/* Rather than adding dark: variants everywhere, the zinc scale is     */
+/* inverted (zinc-50 swaps with zinc-950, zinc-100 with zinc-900, and  */
+/* so on) and "white" becomes the dark card surface. Every existing    */
+/* zinc and white class therefore adapts automatically. The pink,      */
+/* green and amber accents are left alone.                             */
+/* (Never write a star followed by a slash inside a comment: it ends   */
+/* the comment early and silently breaks the CSS that follows.)        */
+/* ------------------------------------------------------------------ */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
+  color-scheme: dark;
+
+  --background: #000000;
+  --foreground: #ffffff;
+
+  --color-white: oklch(14.1% 0.005 285.823); /* card / surface colour */
+  --color-zinc-50: oklch(14.1% 0.005 285.823);
+  --color-zinc-100: oklch(21% 0.006 285.885);
+  --color-zinc-200: oklch(27.4% 0.006 286.033);
+  --color-zinc-300: oklch(37% 0.013 285.805);
+  --color-zinc-400: oklch(44.2% 0.017 285.786);
+  --color-zinc-500: oklch(55.2% 0.016 285.938);
+  --color-zinc-600: oklch(70.5% 0.015 286.067);
+  --color-zinc-700: oklch(87.1% 0.006 286.286);
+  --color-zinc-800: oklch(92% 0.004 286.32);
+  --color-zinc-900: oklch(96.7% 0.001 286.375);
+  --color-zinc-950: oklch(98.5% 0 0);
 }
 
-/* Tailwind variables (Tailwind v4) */
+/* Tailwind v4 theme tokens */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* body content: JetBrains Mono, headings: Comfortaa */
+  --font-sans: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-heading: var(--font-comfortaa), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+/* Headings use Comfortaa. This references the next/font variable directly:
+   theme tokens declared with "inline" are not emitted as real CSS variables,
+   so var(--font-heading) would be undefined here. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-comfortaa), ui-sans-serif, system-ui, sans-serif;
+  }
 }
 
-h2 {
-  font-size: clamp(1.25rem, 3.5vw, 2.375rem);
+/* Smooth fade between themes. The toggle adds .theme-fade for a moment. */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-fade,
+  html.theme-fade *,
+  html.theme-fade *::before,
+  html.theme-fade *::after {
+    transition:
+      background-color 400ms ease,
+      color 400ms ease,
+      border-color 400ms ease,
+      fill 400ms ease,
+      stroke 400ms ease !important;
+  }
 }
 
-h3 {
-  font-size: clamp(1.15rem, 2.75vw, 1.75rem);
+/* ------------------------------------------------------------------ */
+/* Directional page transitions (View Transitions API)                 */
+/*                                                                     */
+/* The provider sets data-vt="slide" plus --vt-x / --vt-y on <html>.   */
+/* The old page slides out in that direction while the new page        */
+/* slides in from the opposite side, like panning a camera.            */
+/* ------------------------------------------------------------------ */
+
+/* The navbar stays put while the page content slides underneath it. */
+.site-nav {
+  view-transition-name: site-nav;
 }
 
-p {
-  font-size: clamp(1rem, 1.75vw, 1.5rem);
+/* The theme button never moves, even during a slide. */
+.theme-toggle {
+  view-transition-name: theme-toggle;
 }
 
-p.about {
-  font-size: clamp(1rem, 3vw, 2rem);
+@keyframes vt-slide-out {
+  to {
+    transform: translate(
+      calc(var(--vt-x, 0) * 100%),
+      calc(var(--vt-y, 0) * 100%)
+    );
+  }
 }
 
-.modal {
-  font-size: clamp(0.75rem, 2.5vw, 1.25rem);
+@keyframes vt-slide-in {
+  from {
+    transform: translate(
+      calc(var(--vt-x, 0) * -100%),
+      calc(var(--vt-y, 0) * -100%)
+    );
+  }
 }
 
-p.subtitle {
-  font-size: clamp(0.75rem, 2vw, 1rem);
-  font-style: italic;
+html[data-vt="slide"]::view-transition-old(root) {
+  animation: vt-slide-out var(--vt-duration) var(--vt-ease) both;
+  mix-blend-mode: normal;
 }
 
-li {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-style: italic;
-}
-
-li.composers {
-  font-size: clamp(0.65rem, 1.75vw, 0.9rem);
-  font-style: normal;
-}
-
-button {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-}
-
-a {
-  font-size: clamp(0.75rem, 2.5vw, 1.25rem);
-}
-
-/* Hide scrollbar but allow scrolling */
-.hide-scrollbar {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-/* Hide scrollbar */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
+html[data-vt="slide"]::view-transition-new(root) {
+  animation: vt-slide-in var(--vt-duration) var(--vt-ease) both;
+  mix-blend-mode: normal;
 }

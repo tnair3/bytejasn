@@ -1,125 +1,135 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { TransitionLink } from "./transition-link";
+import { CloseIcon, MenuIcon } from "./icons";
+import { cn } from "@/lib/cn";
+
+const sectionLinks = [
+  { name: "projects", href: "/projects" },
+  { name: "photography", href: "/photography" },
+  { name: "music", href: "/music" },
+];
+
+const aboutLink = { name: "about", href: "/about" };
+
+function linkClass(active: boolean) {
+  return cn(
+    "rounded-full px-3 py-1.5 text-sm transition-colors",
+    active
+      ? "bg-zinc-900 text-white"
+      : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900",
+  );
+}
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const dropdownLinks = [
-    { name: "projects", href: "/projects" },
-    { name: "photography", href: "/photography" },
-    { name: "music", href: "/music" },
-  ];
+  // A section stays highlighted on its detail pages, e.g. /projects/daedalus
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
-  const isActive = (href: string) => pathname === href;
-
-  // Close mobile menu when clicking outside
+  // Close the mobile menu on outside click or Escape
   useEffect(() => {
-    function handleClickOutside() {
-      setMobileOpen(false);
-    }
-    if (mobileOpen) {
-      window.addEventListener("click", handleClickOutside);
-      return () => window.removeEventListener("click", handleClickOutside);
-    }
-  }, [mobileOpen]);
+    if (!menuOpen) return;
 
-  // Automatically close mobile menu when navigating to a different page
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    function onPointerDown(e: PointerEvent) {
+      if (!menuRef.current?.contains(e.target as Node)) setMenuOpen(false);
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
 
-  function handleMenuClick(e: React.MouseEvent) {
-    e.stopPropagation();
-  }
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
+  // The landing page has its own navigation
+  if (pathname === "/") return null;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
-      <nav className="relative py-4 px-4 md:px-0">
-        {/* Desktop links */}
-        <div className="hidden md:flex justify-center items-center gap-2">
-          <Link
-            href="/"
-            className={`px-2 py-1 ${isActive("/") ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"}`}
-          >
+    <header className="site-nav sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur">
+      <nav aria-label="Main" className="mx-auto max-w-6xl px-4 py-3">
+        {/* Desktop */}
+        <div className="hidden items-center justify-center gap-1 md:flex">
+          <TransitionLink href="/" className={linkClass(pathname === "/")}>
             home
-          </Link>
-          <span className="mx-2 text-gray-400">|</span>
-
-          {["projects", "photography", "music"].map((linkName) => {
-            const href = `/${linkName}`;
-            const active = isActive(href);
-            return (
-              <div key={href} className="flex items-center">
-                <Link
-                  href={href}
-                  className={`px-2 py-1 ${active ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"}`}
-                >
-                  {linkName}
-                </Link>
-                {linkName === "music" && <span className="mx-2 text-gray-400">|</span>}
-              </div>
-            );
-          })}
-
-          <Link
-            href="/about"
-            className={`px-2 py-1 ${isActive("/about") ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"}`}
+          </TransitionLink>
+          <span className="mx-2 h-4 w-px bg-zinc-300" aria-hidden />
+          {sectionLinks.map((link) => (
+            <TransitionLink
+              key={link.href}
+              href={link.href}
+              className={linkClass(isActive(link.href))}
+            >
+              {link.name}
+            </TransitionLink>
+          ))}
+          <span className="mx-2 h-4 w-px bg-zinc-300" aria-hidden />
+          <TransitionLink
+            href={aboutLink.href}
+            className={linkClass(isActive(aboutLink.href))}
           >
-            about
-          </Link>
+            {aboutLink.name}
+          </TransitionLink>
         </div>
 
-        {/* Mobile layout */}
-        <div className="flex md:hidden justify-center items-center w-full relative">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className={`px-2 py-1 ${isActive("/") ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"}`}
-            >
-              home
-            </Link>
+        {/* Mobile */}
+        <div
+          ref={menuRef}
+          className="relative flex items-center justify-between md:hidden"
+        >
+          <TransitionLink href="/" className="font-heading text-base font-bold">
+            tejas nair
+          </TransitionLink>
 
-            {/* Hamburger */}
-            <button
-              className="px-4 py-2 text-2xl"
-              onClick={(e) => {
-                e.stopPropagation();
-                setMobileOpen(!mobileOpen);
-              }}
-              aria-label="Toggle Menu"
-            >
-              ☰
-            </button>
-
-            <Link
-              href="/about"
-              className={`px-2 py-1 ${isActive("/about") ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"}`}
-            >
-              about
-            </Link>
-          </div>
-
-          {/* Animated Dropdown */}
-          <div
-            className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white shadow-md w-40 rounded-md z-50 origin-top transition-all duration-300 ease-out
-              ${mobileOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0 pointer-events-none"}`}
-            onClick={handleMenuClick}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="rounded-full p-2 text-zinc-700 hover:bg-zinc-100"
           >
-            <div className="flex flex-col items-center py-2">
-              {dropdownLinks.map((link) => (
-                <Link
+            {menuOpen ? (
+              <CloseIcon className="size-5" />
+            ) : (
+              <MenuIcon className="size-5" />
+            )}
+          </button>
+
+          <div
+            id="mobile-menu"
+            inert={!menuOpen}
+            className={cn(
+              "absolute right-0 top-full mt-3 w-48 origin-top-right rounded-xl border border-zinc-200 bg-white p-2 shadow-lg transition duration-200 ease-out",
+              menuOpen
+                ? "scale-100 opacity-100"
+                : "pointer-events-none scale-95 opacity-0",
+            )}
+          >
+            <div className="flex flex-col">
+              {[...sectionLinks, aboutLink].map((link) => (
+                <TransitionLink
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 w-full text-center ${
-                    isActive(link.href) ? "text-gray-900 font-semibold" : "text-gray-600 font-medium hover:text-gray-900"
-                  }`}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    "rounded-lg px-4 py-2.5 text-sm transition-colors",
+                    isActive(link.href)
+                      ? "bg-zinc-100 font-bold text-zinc-900"
+                      : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900",
+                  )}
                 >
                   {link.name}
-                </Link>
+                </TransitionLink>
               ))}
             </div>
           </div>

@@ -1,45 +1,143 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import PageHeader from "@/components/page-header";
+import { TransitionLink } from "@/components/transition-link";
+import SocialLinks from "@/components/social-links";
+import { ArrowRightIcon } from "@/components/icons";
 
-export default function About() {
+export const metadata: Metadata = { title: "about me" };
+
+// Edit the content here.
+const skills = [
+  { label: "languages", items: ["C#", "C++", "Java", "Kotlin", "XML", "Python"] },
+  { label: "frameworks & technologies", items: ["Jetpack Compose", "Vulkan", "Avalonia UI", "React", "Next.js"] },
+  { label: "tools", "items": ["Git", "JetBrains IDEs", "Android Studio", "VS Code", "Visual Studio"] },
+  { label: "environments", "items": ["Linux", "Windows", "WSL", "Hyper-V"] },
+];
+
+const instruments = [
+  { name: "violin", grade: 7, years: 12 },
+  { name: "flute", grade: 5, years: 6 },
+];
+
+const ensembles = [
+  {
+    name: "King's College London GKT Music Society Orchestra",
+    years: "from 2025",
+  },
+  {
+    name: "Westminster City School Music Department Orchestra",
+    years: "2018 – 2025",
+  },
+];
+
+function Row({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans flex justify-center">
-      <main className="flex flex-col w-full px-6 py-10 
-                       max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl">
+    <section className="grid gap-4 border-t border-zinc-200 py-8 md:grid-cols-[10rem_1fr] md:gap-8">
+      <h2 className="text-sm font-bold tracking-wide text-zinc-500">{label}</h2>
+      <div>{children}</div>
+    </section>
+  );
+}
 
-        {/* Heading */}
-        <h1 className="font-comfortaa font-bold text-3xl sm:text-4xl md:text-5xl text-center mb-4">
-          about me
-        </h1>
+export default function AboutPage() {
+  return (
+    <div className="mx-auto w-full max-w-4xl px-6 py-12 sm:py-16">
+      <PageHeader title="about me" />
 
-        {/* Introduction */}
-        <p className="about text-base sm:text-lg md:text-xl mb-2">
-          I am a first year computer science student at King's College London, University of London
+      <div className="mb-12">
+        <p className="text-center text-xl leading-tight sm:text-2xl">
+          2nd Year Computer Science Student at King&apos;s College London
         </p>
+        <p className="text-center text-xl leading-tight sm:text-2xl">
+          Looking for 2027/28 placements
+        </p>
+      </div>
 
-        {/* Skills */}
-        <ul className="list-disc pl-5 text-base sm:text-lg md:text-xl space-y-1 mb-6">
-          <li>Python, Java, C#</li>
-          <li>HTML, CSS, JavaScript, TypeScript</li>
-          <li>React, Next.js, Tailwind CSS</li>
-          <li>Git, GitHub, Visual Studio, VS Code</li>
+      <Row label="code">
+        <dl className="grid gap-5 sm:grid-cols-2">
+          {skills.map((group) => (
+            <div key={group.label}>
+              <dt className="mb-2 text-xs text-zinc-500">{group.label}</dt>
+              <dd>
+                <ul className="flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-700"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Row>
+
+      <Row label="photography">
+        <p className="text-lg leading-relaxed">
+          I am an aspiring freelance photographer.
+        </p>
+        <TransitionLink
+          href="/photography"
+          className="group mt-3 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+        >
+          see my photography
+          <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+        </TransitionLink>
+      </Row>
+
+      <Row label="music">
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {instruments.map((instrument) => (
+            <li
+              key={instrument.name}
+              className="rounded-xl border border-zinc-300 bg-white p-4"
+            >
+              <p className="font-bold">{instrument.name}</p>
+              <p className="mt-1 text-sm text-zinc-500">
+                grade {instrument.grade} · {instrument.years} years
+              </p>
+            </li>
+          ))}
         </ul>
 
-        {/* Photography */}
-        <p className="about text-base sm:text-lg md:text-xl mb-2">
-          I am an aspiring freelance photographer
-        </p>
-
-        {/* Music */}
-        <p className="about text-base sm:text-lg md:text-xl mb-2">
-          I am a grade 7 violinist and a grade 5 flautist
-        </p>
-
-        <ul className="list-disc pl-5 text-base sm:text-lg md:text-xl space-y-1">
-          <li>Violin for 12 years, Flute for 6 years</li>
-          <li>Westminster City School Music Department Orchestra</li>
-          <li>King's College London GKT Music Society Orchestra</li>
+        <ul className="mt-5 flex flex-col gap-3 text-sm text-zinc-700 sm:text-base">
+          {ensembles.map((ensemble) => (
+            <li key={ensemble.name} className="flex gap-3">
+              <span
+                aria-hidden
+                className="mt-2 size-1.5 shrink-0 rounded-full bg-purple-500"
+              />
+              <div>
+                <span className="block">{ensemble.name}</span>
+                <span className="block text-xs text-zinc-500 sm:text-sm">
+                  {ensemble.years}
+                </span>
+              </div>
+            </li>
+          ))}
         </ul>
-      </main>
+
+        <TransitionLink
+          href="/music"
+          className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+        >
+          listen &amp; read my music
+          <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+        </TransitionLink>
+      </Row>
+
+      <Row label="get in touch">
+        <SocialLinks />
+      </Row>
     </div>
   );
 }

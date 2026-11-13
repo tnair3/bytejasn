@@ -1,39 +1,38 @@
-import Link from "next/link";
-import Image from "next/image";
+import { TransitionLink } from "@/components/transition-link";
+import SocialLinks from "@/components/social-links";
+
+const links = [
+  { href: "/projects", label: "projects" },
+  { href: "/photography", label: "photography" },
+  { href: "/music", label: "music" },
+  { href: "/about", label: "about me" },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans overflow-hidden">
-      <main className="flex flex-col items-center justify-center gap-8">
-        {/* Name / Title */}
-        <h1 className="font-comfortaa font-bold text-center text-4xl sm:text-6xl">
+    <div className="flex flex-1 items-center justify-center px-6 py-12">
+      <div className="flex flex-col items-center justify-center gap-8">
+        <h1 className="text-center text-4xl font-bold sm:text-6xl">
           tejas nair
         </h1>
 
-        {/* Navigation Links */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center">
-          <Link href="/projects" className="font-comfortaa hover:underline">projects</Link>
-          <Link href="/photography" className="font-comfortaa hover:underline">photography</Link>
-          <Link href="/music" className="font-comfortaa hover:underline">music</Link>
-          <Link href="/about" className="font-comfortaa hover:underline">about me</Link>
-        </div>
+        <nav
+          aria-label="Pages"
+          className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8"
+        >
+          {links.map((link) => (
+            <TransitionLink
+              key={link.href}
+              href={link.href}
+              className="text-zinc-600 underline-offset-4 transition-colors hover:text-zinc-900 hover:underline"
+            >
+              {link.label}
+            </TransitionLink>
+          ))}
+        </nav>
 
-        {/* Social Icons */} 
-        <div className="flex flex-row gap-6 mt-4">
-          <Link href="https://www.linkedin.com/in/tejas-nair-063737299/" target="_blank" rel="noopener noreferrer">
-            <Image src="/icons/linkedin.svg" alt="LinkedIn" width={28} height={28} />
-          </Link>
-          <Link href="mailto:nairstejas@gmail.com">
-            <Image src="/icons/gmail.svg" alt="Gmail" width={28} height={28} />
-          </Link>
-          <Link href="https://github.com/tnair3" target="_blank" rel="noopener noreferrer">
-            <Image src="/icons/github.svg" alt="Github" width={28} height={28} />
-          </Link>
-          <Link href="https://www.instagram.com/by.tejasn/" target="_blank" rel="noopener noreferrer">
-            <Image src="/icons/instagram.svg" alt="Instagram" width={28} height={28} />
-          </Link>
-        </div>
-      </main>
+        <SocialLinks className="mt-4" />
+      </div>
     </div>
   );
 }
