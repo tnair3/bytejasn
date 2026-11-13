@@ -51,14 +51,17 @@ export default function AboutPage() {
     <div className="mx-auto w-full max-w-4xl px-6 py-12 sm:py-16">
       <PageHeader title="about me" />
 
-      <div className="mb-12">
+      <div className="mb-8">
         <p className="text-center text-xl leading-tight sm:text-2xl">
           2nd Year Computer Science Student at King&apos;s College London
         </p>
-          <div className="mt-3 flex justify-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium tracking-wide text-zinc-600 shadow-sm sm:text-base">
+          <div className="mt-2 flex justify-center">
+              <div className="grid w-64 grid-cols-[16px_1fr_4px] items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium tracking-wide text-zinc-600 shadow-sm sm:text-base">
                   <span className="size-2 animate-pulse rounded-full bg-purple-500" />
-                  <AgeCounter />
+                  <span className="text-center tabular-nums">
+                      <AgeCounter />
+                  </span>
+                  <span />
               </div>
           </div>
       </div>
