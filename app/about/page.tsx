@@ -3,6 +3,7 @@ import PageHeader from "@/components/page-header";
 import { TransitionLink } from "@/components/transition-link";
 import SocialLinks from "@/components/social-links";
 import { ArrowRightIcon } from "@/components/icons";
+import AgeCounter from "@/components/age-counter";
 
 export const metadata: Metadata = { title: "about me" };
 
@@ -54,9 +55,12 @@ export default function AboutPage() {
         <p className="text-center text-xl leading-tight sm:text-2xl">
           2nd Year Computer Science Student at King&apos;s College London
         </p>
-        <p className="text-center text-xl leading-tight sm:text-2xl">
-          Looking for 2027/28 placements
-        </p>
+          <div className="mt-3 flex justify-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium tracking-wide text-zinc-600 shadow-sm sm:text-base">
+                  <span className="size-2 animate-pulse rounded-full bg-purple-500" />
+                  <AgeCounter />
+              </div>
+          </div>
       </div>
 
       <Row label="code">
