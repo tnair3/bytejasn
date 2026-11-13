@@ -1,4 +1,7 @@
+import type {Metadata} from "next";
 import PageHeader from "@/components/page-header";
+
+export const metadata: Metadata = { title: "photography" };
 
 export default function PhotographyPage() {
   return (

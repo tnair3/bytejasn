@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "tejas nair",
+    default: "tejas nair | software, music, and photography",
     template: "%s · tejas nair",
   },
   description:

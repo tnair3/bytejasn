@@ -1,8 +1,11 @@
+import type {Metadata} from "next";
 import Image from "next/image";
 import PageHeader from "@/components/page-header";
 import { scores } from "@/data/scores";
 import { socials } from "@/data/socials";
 import { ArrowUpRightIcon } from "@/components/icons";
+
+export const metadata: Metadata = { title: "music" };
 
 const instagram = socials.find((s) => s.name === "Instagram");
 
