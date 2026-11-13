@@ -8,7 +8,7 @@ export type Projects = {
   github?: string;
   release?: string;
   status: "completed" | "in active development" | "planned";
-  year: string;
+  year: number;
   featured?: boolean; // pinned at the top of the projects page
 };
 
@@ -30,7 +30,7 @@ export const projects: Projects[] = [
     ],
     github: "https://github.com/tnair3/NEA-A-Level-2024-25",
     status: "completed",
-    year: "2025",
+    year: 2025,
   },
   {
     id: "daedalus",
@@ -41,7 +41,7 @@ export const projects: Projects[] = [
     github: "https://github.com/tnair3/Daedalus",
     release: "pre-alpha",
     status: "in active development",
-    year: "2027",
+    year: 2027,
     featured: true,
   },
   {
@@ -53,7 +53,7 @@ export const projects: Projects[] = [
     github: "https://github.com/tnair3/MediaPlayer",
     release: "1.0-alpha2",
     status: "in active development",
-    year: "2026",
+    year: 2026,
   },
   {
     id: "os",
@@ -63,7 +63,7 @@ export const projects: Projects[] = [
     gallery: [],
     github: "https://github.com/tnair3/OS",
     status: "planned",
-    year: "2027",
+    year: 2027,
   },
   {
     id: "shell",
@@ -73,7 +73,7 @@ export const projects: Projects[] = [
     gallery: [],
     github: "",
     status: "planned",
-    year: "2027",
+    year: 2027,
   },
 ];
 

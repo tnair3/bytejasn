@@ -6,8 +6,13 @@ import ProjectCard from "@/components/project-card";
 export const metadata: Metadata = { title: "projects" };
 
 export default function ProjectsPage() {
-    const pinned = projects.filter((p) => p.featured);
-    const others = projects.filter((p) => !p.featured);
+    const pinned = projects
+        .filter((p) => p.featured)
+        .sort((a, b) => a.year - b.year);
+
+    const others = projects
+        .filter((p) => !p.featured)
+        .sort((a, b) => a.year - b.year);
 
     return (
         <div className="mx-auto w-full max-w-6xl px-6 py-12 sm:py-16">
