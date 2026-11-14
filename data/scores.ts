@@ -11,7 +11,7 @@ export type Scores = {
 export const scores: Scores[] = [
   {
     id: "dtd-demo",
-    title: "Dusk to Dawn",
+    title: "Dawn to Dusk",
     type: "album",
     link: "https://drive.google.com/drive/folders/14vWMQfFKFZe5ELpodU2LSVZGViBgPn5R",
     composers: [ "Tejas Nair" ],
