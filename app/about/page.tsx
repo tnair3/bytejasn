@@ -3,11 +3,13 @@ import PageHeader from "@/components/page-header";
 import { TransitionLink } from "@/components/transition-link";
 import SocialLinks from "@/components/social-links";
 import { ArrowRightIcon } from "@/components/icons";
-import AgeCounter from "@/components/age-counter";
+import AgeToggle from "@/components/age-toggle";
 
 export const metadata: Metadata = { title: "about me" };
 
 // Edit the content here.
+const BIRTH = "2007-03-29T08:00:00+00:00";
+
 const skills = [
   { label: "languages", items: ["C#", "C++", "Java", "Kotlin", "XML", "Python"] },
   { label: "frameworks & technologies", items: ["Jetpack Compose", "Vulkan", "Avalonia UI", "React", "Next.js"] },
@@ -61,12 +63,8 @@ export default function AboutPage() {
               </p>
           </div>
           <div className="mt-2 flex justify-center">
-              <div className="grid w-64 grid-cols-[16px_1fr_4px] items-center rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium tracking-wide text-zinc-600 shadow-sm sm:text-base">
-                  <span className="size-2 animate-pulse rounded-full bg-purple-500" />
-                  <span className="text-center tabular-nums">
-                      <AgeCounter />
-                  </span>
-                  <span />
+              <div className="mt-2 flex justify-center">
+                  <AgeToggle birth={BIRTH} />
               </div>
           </div>
       </div>
